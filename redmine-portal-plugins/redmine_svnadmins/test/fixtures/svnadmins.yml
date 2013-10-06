@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  reponame: MyString
+  created_on: 2011-10-27 15:56:19
+two:
+  id: 2
+  reponame: MyString
+  created_on: 2011-10-27 15:56:19

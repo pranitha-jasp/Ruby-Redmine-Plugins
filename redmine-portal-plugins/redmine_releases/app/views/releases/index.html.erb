@@ -1,0 +1,45 @@
+<div class="contextual">
+  <%=link_to  ('Test Lab', {:controller => 'releases', :action => 'new', :project_id => @project}, :class => 'icon icon-add') if @project && User.current.allowed_to?(:edit_releases, @project)%>
+  <%=link_to ('Make a Release',{:controller => 'releases', :action => 'publish', :project_id => @project }, :class => 'icon icon-add') if @project && User.current.allowed_to?(:edit_releases, @project)%>
+
+</div>
+<h2>Releases</h2>
+<div class="contextual">
+<%=link_to ('Clear', {:controller => 'releases', :action => 'clear', :project_id => @project}, :class => 'icon icon-cancel', :confirm => l(:delete_instances), :method => :post) if @project && User.current.allowed_to?(:edit_releases, @project)%>
+</div>
+<table class="list files" cellpadding=1 border=1 style="width:80%;" align="center">
+
+<thead><tr>
+    <%= sort_header_tag('Sno', :caption => l(:field_id)) %>
+    <%= sort_header_tag('Repo Name', :caption => l(:field_repo), :default_order => 'desc') %>
+    <%= sort_header_tag('SVN Revision', :caption => l(:field_revision), :default_order => 'desc') %>
+    <%= sort_header_tag('Previewed_On', :caption => l(:field_preview_date), :default_order => 'desc') %>
+    <%= sort_header_tag('Published_On', :caption => l(:field_publish_date), :default_order => 'desc') %>
+    <%= sort_header_tag('Repo Type', :caption => l(:field_repo_type), :default_order => 'desc') %>
+</tr></thead>
+<% i = 0%>
+<% @releases.each do |release| %>
+<% if params[:project_id] == release.lab_id %>
+<% i = i+1 %>
+  <tr>
+    <td class="id" align="center"><%= i %></td>
+    <td class="url" align="center"><%= release.url %></td>
+    <td class="revision" align="center" style="width:20%;"><%= release.revision %></td>
+    <td class="preview" align="center" style="width:20%;"><%= release.is_previewed.strftime("%Y-%m-%d %H:%M") unless release.is_previewed.nil? %></td>
+    <td class="publish" align="center" style="width:20%;"><%= release.is_published.strftime("%Y-%m-%d %H:%M") unless release.is_published.nil? %></td>
+    <td class="type" align="center" style="width:20%;"><%= release.repo_type %></td>
+  </tr>
+<% end %>
+<% end %>
+</table>
+
+<div>
+<p><b>This is the plugin which will help you in releasing or publishing your lab, after you test your lab  </b><br><br>
+ <b> 1. To test your lab instance visit:</b><br>
+ Test Machine: <a href="http://test.virtual-labs.ac.in/labs/<%= params[:project_id] %>" target="_blank"><b>http://test.virtual-labs.ac.in/labs/<%= params[:project_id] %></b></a><br><br>
+ <b> 2. To view a release visit:</b><br>
+ Deployment Machine: <a href="http://deploy.virtual-labs.ac.in/labs/<%= params[:project_id] %>" target="_blank"><b>http://deploy.virtual-labs.ac.in/labs/<%= params[:project_id] %></b></a><br>
+</p>
+</div>
+
+

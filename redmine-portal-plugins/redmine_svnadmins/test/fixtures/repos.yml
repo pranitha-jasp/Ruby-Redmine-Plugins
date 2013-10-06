@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  lab_id: MyString
+  reponame: MyString
+  created_on: 2011-10-31 12:42:09
+two:
+  id: 2
+  lab_id: MyString
+  reponame: MyString
+  created_on: 2011-10-31 12:42:09

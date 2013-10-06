@@ -1,0 +1,8 @@
+<div class="contextual">
+<%=link_to  ('<h3><b>Back</b></h3>', {:controller => 'packages', :action => 'index', :project_id => params[:project_id]}) %>
+</div>
+<h2>Database Request Template</h2>
+<% labelled_tabular_form_for :package, @package, :url => { :action => "database" , :project_id => params[:project_id], :method => :post} do |f| %>
+<%= render :partial => 'form1', :locals => { :f => f } %>
+<% end %>
+

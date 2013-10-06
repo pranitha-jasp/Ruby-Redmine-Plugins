@@ -1,0 +1,15 @@
+<div class="contextual">
+<%=link_to  ('<h3><b>Back</b></h3>', {:controller => 'packages', :action => 'index', :project_id => params[:project_id]}) %>
+</div>
+<h2>Enter the Package to be Installed</h2>
+<% labelled_tabular_form_for :package, @package, :url => { :action => "new" , :project_id => params[:project_id], :method => :post} do |f| %>
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= submit_tag l(:button_newpackage) %> 
+<%= javascript_tag "Form.Element.focus('url');" %>
+<% end %>
+<div>
+<p><b>Note: </b><br>
+1. If your name of the package to be installed is <b>&lt;name&gt;_&lt;version&gt;_&lt;arch&gt;.deb</b> then mention the <b>Package Name</b> as <b>&lt;name&gt;</b><br>
+2. Please mention the packages which need to be installed on the server<br>
+<br></p>
+</div>

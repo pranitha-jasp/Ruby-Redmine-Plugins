@@ -1,0 +1,16 @@
+<div class="contextual">
+  <%=link_to  ('<h3><b>Back</b></h3>', {:controller => 'releases', :action => 'index', :project_id => @project}) %>
+</div>
+<h2>Test your Lab</h2>
+<p>Please enter your repository name and recently committed revision below</p>
+<% labelled_tabular_form_for :release, @release, :url => { :action => "new" , :project_id => @project, :method => :post} do |f| %>
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= submit_tag l(:button_new) %>
+<%= javascript_tag "Form.Element.focus('url');" %>
+<% end %>
+
+<div>
+<p><b>Note: </b>Repo Name is the repo which is part of <b>Repositories</b> and Revision is the revision you committed on svn and bazaar. For Git, you can mention the hash-key or if you don't mention anything it will clone the latest git repo</p>
+
+<p><b>Note: For SVN and Bazaar, revision is the mandatory field but for Git, it is not mandatory</b></p>
+</div>

@@ -1,0 +1,48 @@
+<div class="contextual">
+  <%=link_to  ('Request a Package', {:controller => 'packages', :action => 'new', :project_id => @project}, :class => 'icon icon-package') if @project && User.current.allowed_to?(:new_package, @project)%>
+  <%=link_to  ('Refresh',{:controller => 'packages', :action => 'reload', :project_id => @project , :package => 'all'} , :method => :post ,:class => 'icon icon-reload') if @project && User.current.allowed_to?(:reload_package, @project)%>
+</div>
+
+<h2>Server-side Requirements</h2>
+
+<% delete_allowed = User.current.allowed_to?(:new_package, @project) %>
+<% reload_allowed = User.current.allowed_to?(:reload_package, @project) %>
+
+<table class="list files" cellpadding=1 border=1 style="width:60%;" align="center">
+<thead><tr>
+    <%= sort_header_tag('Sno', :caption => l(:field_id)) %>
+    <%= sort_header_tag('Package Name', :caption => l(:field_packagename), :default_order => 'desc') %>
+    <%= sort_header_tag('Version', :caption => l(:field_version), :default_order => 'desc') %>
+    <%= sort_header_tag('Status', :caption => l(:field_status), :default_order => 'desc') %>
+    <th></th>
+    <th></th>
+</tr></thead>
+<% i = 0 %>
+<% @packages.each do |package| %>
+<% if params[:project_id] == package.lab_id %>
+<% i = i+1 %>
+<tr> 
+  <td class="id" align="center"><%= i %></td>
+  <td class="packagename" align="center" style="width:30%;"><%= package.packagename %></td>
+  <td class="version" align="center" style="width:20%;"><%= package.version %></td>
+  <td class="status" align="center" style="width:20%;"><%= package.status %></td>
+  <td align="center" style="width:10%"> <%= link_to(image_tag('delete.png'), {:controller => 'packages', :action => 'destroy', :project_id => @project , :package => package.packagename}, :confirm => l(:text_are_you_sure), :method => :post) if delete_allowed %></td>
+  <td align="center" style="width:10%"><%= link_to(image_tag('reload.png'), {:controller => 'packages', :action => 'reload', :project_id => @project , :package => package.packagename}, :method => :post) if reload_allowed %></td>
+</tr>
+<% end %>
+<% end %>
+</table>
+<div>
+<p><b>Note: </b><br><br>
+1. Mention packages from Ubuntu 11.04 or above <br><br>
+2. Try to make a release when all the packages you mentioned above are installed.
+</p>
+</div>
+<form>
+<h3><b>Database</b></h3><br><br>
+<p>1. We are maintaining a central database server for all the labs
+  using database. The login credentials will be mailed to you if you
+  send a request to <b>engg@virtual-labs.ac.in</b>   <br><br>
+2. Copy the <%=link_to  ('<b>this</b>', {:controller => 'packages',
+  :action => 'database', :project_id => params[:project_id]}) %> template to the email and send to <b>engg@virtual-labs.ac.in</b><br><br>
+3. After you receive your credentials, kindly login <a href="http://db.virtual-labs.ac.in" target="_blank"><b>here</b></a></p>

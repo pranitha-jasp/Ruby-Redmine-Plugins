@@ -1,0 +1,11 @@
+<div class="contextual">
+<%=link_to ('<h3><b>Back</b></h3>', {:controller => 'releases', :action => 'index', :project_id => @project})%>
+</div>
+
+<h2>Agreement</h2>
+<% labelled_tabular_form_for :release, @release, :url => { :action => "publish" , :project_id => @project, :method => :post} do |f|%>
+<%= render :partial => 'publish_form', :locals => { :f => f }%>
+<p align="center">
+<%= submit_tag "Accept"%>
+</p>
+<% end %>

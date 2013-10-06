@@ -1,0 +1,18 @@
+<h2>SSH Key Update</h2>
+
+<% labelled_tabular_form_for :sshkey, @sshkey, :url => { :action => "index" ,:method => :post, :project_id => @project} do |f| %>
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= submit_tag l(:button_update) %> 
+<%= javascript_tag "Form.Element.focus('url');" %>
+<% end %>
+
+<div>
+<p><b>Note: </b>Your keys will be added to devel machine so that you can access svn repositories<br><br>
+If you don't have keys follow the below procedure:<br>
+* Generate your key using ssh-keygen<br/><br>
+* Your key will be in /home/&lt;username&gt;/.ssh/id_rsa.pub<br/><br>
+* Copy the key from id_rsa.pub<br/><br>
+* Test your login using<br>
+  <b>     ssh <%= User.current.login %>@svn.virtual-labs.ac.in</b> 
+</p>
+</div>

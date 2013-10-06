@@ -1,0 +1,6 @@
+# English strings go here for Rails i18n
+en:
+  my_label: "My label"
+  button_new: "New"
+  field_packagename: "Package Name"
+  button_newpackage: "Request for Package"

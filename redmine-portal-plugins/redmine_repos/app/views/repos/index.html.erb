@@ -1,0 +1,37 @@
+<div class="contextual">
+  <%=link_to  ('New Repository', {:controller => 'repos', :action => 'create', :project_id => @project}, :class => 'icon icon-add') if @project && User.current.allowed_to?(:new_repo, @project) %>
+</div>
+
+<h2>Repo List</h2>
+
+<% delete_allowed = User.current.allowed_to?(:new_repo, @project) %>
+
+<table class="list files" cellpadding=1 border=1 style="width:60%;" align="center">
+  <thead><tr>
+      <%= sort_header_tag('Sno', :caption => l(:field_id)) %>
+      <%= sort_header_tag('Repository Name', :caption => l(:field_reponame), :default_order => 'desc') %>
+      <%= sort_header_tag('Description', :caption => l(:field_description), :default_order => 'desc') %>
+      <%= sort_header_tag('Created On', :caption => l(:field_created_on), :default_order => 'desc') %>
+      <%= sort_header_tag('Repo Type', :caption => l(:field_repotype), :default_order => 'desc') %>
+      <th></th>
+  </tr></thead>
+  <% i = 0 %>
+  <% @repos.each do |repo| %>
+  <% if params[:project_id] == repo.lab_id %>
+  <% i = i+1 %>
+  <tr>
+    <td class="id" align="center"><%= i %></td>
+    <td class="reponame" align="center" style="width:30%;"><%= repo.reponame %></td>
+    <td class="reponame" align="center" style="width:30%;"><%= repo.description %></td>
+    <td class="created_on" align="center" style="width:20%;"><%= repo.created_on.strftime("%Y-%m-%d %H:%M:%S") %></td>
+    <td class="repotype" align="center" style="width:30%;"><%= repo.repotype %></td>
+    <td align="center" style="width:10%"> <%= link_to(image_tag('delete.png'), {:controller => 'repos', :action => 'destroy', :project_id => @project , :repo => repo.reponame}, :confirm => l(:text_are_you_sure), :method => :post) if delete_allowed %></td>
+  </tr>
+  <% end %>
+  <% end %>
+</table>
+<div style="align: center">
+  <p style="font-size:12"><b>Note: </b>After you create your repository, Get a working copy of your sources using: <br><br><b>1. For SVN, run the below command<br> svn co http://svn.virtual-labs.ac.in/<%= params[:project_id] %>/&lt;Repository Name&gt; --username <%= User.current.login %></b><br><br><b>2. For Git, run the below command <br> git clone http://<%= User.current.login %>@git.virtual-labs.ac.in/git/<%= params[:project_id] %>/git/&lt;Repository Name&gt;</b><br><br><b>3. For Bazaar, run the below command <br> bzr branch http://<%= User.current.login %>@bzr.virtual-labs.ac.in/bzr/<%= params[:project_id] %>/bzr/&lt;Repository Name&gt;/trunk</p>
+
+<!--<p> You can go through the tutorials of SVN, Git and Bazaar at http:// </p> -->
+</div>

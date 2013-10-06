@@ -1,0 +1,18 @@
+# English strings go here for Rails i18n
+en:
+    my_label: My label
+    field_id: Sno
+    field_revision: Revision
+    button_new: Test
+    field_repo: Repository Name
+    field_url: Repository Name
+    label_url: Repository Name
+    error_can_t_publish_lab: Unable to Release		
+    notice_pubished_lab: Release Successful
+    notice_previwed_lab: Test Successful
+    error_pubished_lab: Releasing Failed
+    error_previwed_lab: Testing Failed
+    field_preview_date: Tested On
+    field_publish_date: Released On
+    delete_instances: The log of all unreleased instances will be deleted
+    field_repo_type: Repository Type 

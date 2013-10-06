@@ -1,0 +1,8 @@
+# English strings go here for Rails i18n
+en:
+  my_label: "My label"
+  field_reponame: "Repository Name"
+  field_created_on: "Created On"
+  button_create: "Create"
+  field_description: "Description"
+  field_repotype: "Repository Type"

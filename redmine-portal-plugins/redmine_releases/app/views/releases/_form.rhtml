@@ -1,0 +1,7 @@
+<%= error_messages_for 'Releases' %>
+<div class="box">
+<p><%= f.select :repo_type, options_for_select([['SVN','svn'], ['Git','git'], ['Bazaar','bzr']]) %>
+<p><%= f.text_field :url, :required => true, :size => 60 %></p>
+<p><%= f.text_field :revision, :required => false, :size => 60 %></p>
+<p><%= f.hidden_field :project_id, :value => params[:project_id] %></p>
+</div>

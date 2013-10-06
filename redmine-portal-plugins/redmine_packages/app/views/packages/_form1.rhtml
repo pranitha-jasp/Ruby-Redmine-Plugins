@@ -1,0 +1,16 @@
+
+<%= error_messages_for 'Packages' %>
+<div class="box">
+<p><%= f.hidden_field :project_id, :value => params[:project_id] %></p>
+Dear Engineering Team,
+<br><br>
+<div>
+I need database access to my lab. Below are the details<br>
+<b>Database Name: </b><%= params[:project_id] %><br>
+<b>User Name: </b><%= params[:project_id] %><br>
+</div>
+<br><br><br>
+Thanks & Regards,<br>
+<%= User.current.login %>
+</div>
+

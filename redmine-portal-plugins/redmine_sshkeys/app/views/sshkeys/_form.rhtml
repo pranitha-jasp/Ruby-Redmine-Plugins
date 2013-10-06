@@ -1,0 +1,13 @@
+<%= error_messages_for 'sshkeys' %>
+<% @currentkey = nil
+   key_val = ''
+   
+    Sshkey.find(:all).each do |@key|
+      if @key[:username] == User.current.login
+        @currentkey = @key
+	key_val = @key[:key]
+      end
+    end %>
+<div class="box">
+<p><%= f.text_area :key, :required => true, :cols => 120, :rows => 8, :value => key_val %></p>
+</div>

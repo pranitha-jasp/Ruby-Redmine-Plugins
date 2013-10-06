@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  lab_id: MyString
+  packagename: MyString
+  status: MyString
+  version: MyString
+two:
+  id: 2
+  lab_id: MyString
+  packagename: MyString
+  status: MyString
+  version: MyString
